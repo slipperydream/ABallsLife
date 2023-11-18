@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://8nreqq2rooi8"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_c6e13"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_p78r1"]
+radius = 0.484959
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8b2e6"]
+albedo_color = Color(1, 0.843137, 0, 1)
+metallic = 1.0
+normal_enabled = true
+
+[sub_resource type="Environment" id="Environment_m7itj"]
+background_mode = 1
+background_color = Color(0.529412, 0.807843, 0.921569, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
+[node name="Player" type="RigidBody3D"]
+collision_mask = 14
+script = ExtResource("1_c6e13")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_p78r1")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CollisionShape3D"]
+material = SubResource("StandardMaterial3D_8b2e6")
+
+[node name="CameraRig" type="Marker3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 2.85, 3.5)
+environment = SubResource("Environment_m7itj")
+current = true
