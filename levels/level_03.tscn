@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cjg8hh0li0njo"]
+[gd_scene load_steps=9 format=3 uid="uid://dwve3ytvusqlr"]
 
-[ext_resource type="Script" path="res://levels/level.gd" id="1_ohe1v"]
-[ext_resource type="PackedScene" uid="uid://c52nnhim3fl52" path="res://common/goal.tscn" id="3_jblah"]
-[ext_resource type="PackedScene" uid="uid://0o5ngra2leq6" path="res://common/deathzone.tscn" id="4_npbqe"]
+[ext_resource type="Script" path="res://levels/level.gd" id="1_8hek1"]
+[ext_resource type="PackedScene" uid="uid://c52nnhim3fl52" path="res://common/goal.tscn" id="2_s68av"]
+[ext_resource type="PackedScene" uid="uid://0o5ngra2leq6" path="res://common/deathzone.tscn" id="3_qt00s"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d4oxc"]
 albedo_color = Color(0, 1, 0, 1)
@@ -27,9 +27,9 @@ adjustment_brightness = 0.75
 adjustment_contrast = 1.5
 adjustment_saturation = 1.2
 
-[node name="Level01" type="Node3D"]
-script = ExtResource("1_ohe1v")
-next_level = "res://levels/level_02.tscn"
+[node name="Level03" type="Node3D"]
+script = ExtResource("1_8hek1")
+next_level = "res://levels/level_04.tscn"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.5, -0.75, 0.433013, 0, 0.5, 0.866026, -0.866025, -0.433013, 0.25, 0, 5, 0)
@@ -100,24 +100,45 @@ collision_layer = 2
 transform = Transform3D(11.9427, 0, 0, 0, 1, 0, 0, 0, 10.2175, -0.0530248, 3.40894, -35.7204)
 use_collision = true
 collision_layer = 2
+size = Vector3(1.5, 1, 1)
+
+[node name="Floor6" type="CSGBox3D" parent="Course"]
+transform = Transform3D(11.9427, 0, 0, 0, 1, 0, 0, 0, 10.2175, -0.0530248, 3.40894, -52.4748)
+use_collision = true
+collision_layer = 2
+size = Vector3(1.5, 1, 2.282)
+
+[node name="Floor7" type="CSGBox3D" parent="Course"]
+transform = Transform3D(11.9427, 0, 0, 0, 1, 0, 0, 0, 10.2175, 3.90578, 3.40894, -48.6846)
+operation = 2
+use_collision = true
+collision_layer = 2
+size = Vector3(0.412415, 1, 2.30692)
+
+[node name="Floor8" type="CSGBox3D" parent="Course"]
+transform = Transform3D(11.9427, 0, 0, 0, 1, 0, 0, 0, 10.2175, -4.43947, 3.40894, -48.6846)
+operation = 2
+use_collision = true
+collision_layer = 2
+size = Vector3(0.412415, 1, 2.30692)
 
 [node name="GoalPlatform" type="CSGCombiner3D" parent="."]
 use_collision = true
 collision_layer = 2
 
 [node name="Floor6" type="CSGBox3D" parent="GoalPlatform"]
-transform = Transform3D(11.9427, 0, 0, 0, 1, 0, 0, 0, 10.2175, -0.0530248, 2.59994, -51.4404)
+transform = Transform3D(11.9427, 0, 0, 0, 1, 0, 0, 0, 10.2175, -0.0530248, 2.59994, -74.1046)
 use_collision = true
 collision_layer = 2
 
 [node name="Floor7" type="CSGBox3D" parent="GoalPlatform"]
-transform = Transform3D(4.80515, 0, 0, 0, 1, 0, 0, 0, 4.4647, -0.0591727, 2.73988, -51.4353)
+transform = Transform3D(4.80515, 0, 0, 0, 1, 0, 0, 0, 4.4647, -0.0591727, 2.73988, -74.0994)
 operation = 2
 use_collision = true
 collision_layer = 2
 
 [node name="Flagpole" type="CSGBox3D" parent="GoalPlatform"]
-transform = Transform3D(0.951353, 0, 0, 0, 14.3377, 0, 0, 0, 1.06187, -2.41784, 2.59994, -53.7531)
+transform = Transform3D(0.951353, 0, 0, 0, 14.3377, 0, 0, 0, 1.06187, -2.41784, 2.59994, -76.4173)
 use_collision = true
 collision_layer = 2
 size = Vector3(0.25, 1, 0.25)
@@ -128,12 +149,13 @@ transform = Transform3D(15.8875, 0, 0, 0, 1, 0, 0, 0, 0.814909, 1.0997, 0.43637,
 size = Vector3(0.150818, 0.111941, 0.1)
 material = SubResource("StandardMaterial3D_q17je")
 
-[node name="Goal" parent="." instance=ExtResource("3_jblah")]
+[node name="Goal" parent="." instance=ExtResource("2_s68av")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0966825, 2.01469, -74.4015)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8s6hh")
 
-[node name="Deathzone" parent="." instance=ExtResource("4_npbqe")]
+[node name="Deathzone" parent="." instance=ExtResource("3_qt00s")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, -10, -34.0633)
 
 [connection signal="goal_reached" from="Goal" to="." method="_on_goal_goal_reached"]

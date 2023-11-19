@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dmw516sr3bx1"
+path="res://.godot/imported/DavidKBD - HexaPuppies Pack - 10 - New Horizons - 1.ogg-f4dde0f8f618e13a8a0c52230dab0091.oggvorbisstr"
+
+[deps]
+
+source_file="res://sound/music/DavidKBD - HexaPuppies Pack - 10 - New Horizons - 1.ogg"
+dest_files=["res://.godot/imported/DavidKBD - HexaPuppies Pack - 10 - New Horizons - 1.ogg-f4dde0f8f618e13a8a0c52230dab0091.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

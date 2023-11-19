@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://jk6efgbk0c6k"]
+[gd_scene load_steps=9 format=3 uid="uid://jk6efgbk0c6k"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_47b7r"]
-[ext_resource type="PackedScene" uid="uid://8nreqq2rooi8" path="res://player/player.tscn" id="2_tn2db"]
 [ext_resource type="PackedScene" uid="uid://c52nnhim3fl52" path="res://common/goal.tscn" id="3_k10pi"]
 [ext_resource type="PackedScene" uid="uid://0o5ngra2leq6" path="res://common/deathzone.tscn" id="4_n4i70"]
 
@@ -30,9 +29,7 @@ adjustment_saturation = 1.2
 
 [node name="Level02" type="Node3D"]
 script = ExtResource("1_47b7r")
-next_level = "res://levels/bowling.tscn"
-
-[node name="Player" parent="." instance=ExtResource("2_tn2db")]
+next_level = "res://levels/level_03.tscn"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.5, -0.75, 0.433013, 0, 0.5, 0.866026, -0.866025, -0.433013, 0.25, 0, 5, 0)

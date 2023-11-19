@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b15motdfor4o6"]
+
+[ext_resource type="Script" path="res://entities/spinning_cube.gd" id="1_21msv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2jffv"]
+albedo_color = Color(0.866667, 0.627451, 0.866667, 1)
+
+[node name="SpinningCube" type="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11)
+size = Vector3(12, 12, 12)
+material = SubResource("StandardMaterial3D_2jffv")
+script = ExtResource("1_21msv")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

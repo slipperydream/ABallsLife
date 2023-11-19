@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxrb1ny5arklw"]
+
+[ext_resource type="Script" path="res://entities/Broom.gd" id="1_ufsos"]
+
+[node name="Broom" type="CSGBox3D"]
+transform = Transform3D(11.9427, 0, 0, 0, 1, 0, 0, 0, 10.2175, 21, 5.78797, -44.3286)
+use_collision = true
+collision_layer = 2
+size = Vector3(1, 3, 0.5)
+script = ExtResource("1_ufsos")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

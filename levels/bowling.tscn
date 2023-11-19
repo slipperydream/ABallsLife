@@ -1,7 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://ditx08ac6167b"]
+[gd_scene load_steps=16 format=3 uid="uid://ditx08ac6167b"]
 
 [ext_resource type="Script" path="res://levels/bowling_level.gd" id="1_k3xjj"]
-[ext_resource type="PackedScene" uid="uid://8nreqq2rooi8" path="res://player/player.tscn" id="2_imt4p"]
 [ext_resource type="PackedScene" uid="uid://dvw04w4y1wmax" path="res://entities/gutter.tscn" id="4_0i241"]
 [ext_resource type="PackedScene" uid="uid://clkjoghk5af8j" path="res://entities/trap.tscn" id="4_ewkt6"]
 [ext_resource type="PackedScene" uid="uid://brp1hkdad6ljo" path="res://entities/bowling_ball.tscn" id="4_mlr16"]
@@ -28,26 +27,6 @@ adjustment_brightness = 0.75
 adjustment_contrast = 1.5
 adjustment_saturation = 1.2
 
-[sub_resource type="Animation" id="Animation_7kbvu"]
-resource_name = "walkup"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Player:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 0,
-"values": []
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ufbuw"]
-_data = {
-"walkup": SubResource("Animation_7kbvu")
-}
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3klj"]
 albedo_color = Color(0.411765, 0.411765, 0.411765, 1)
 
@@ -63,9 +42,6 @@ size = Vector3(29.1731, 22.0116, 0.450977)
 [node name="BowlingAlley" type="Node3D"]
 script = ExtResource("1_k3xjj")
 player_start = Vector3(2, 0, 3)
-
-[node name="Player" parent="." instance=ExtResource("2_imt4p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 2)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.5, -0.75, 0.433013, 0, 0.5, 0.866026, -0.866025, -0.433013, 0.25, 0, 5, 0)
@@ -101,11 +77,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, -36.9874)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.4, 0, 0)
 
 [node name="RightGutter" parent="." instance=ExtResource("4_0i241")]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_ufbuw")
-}
 
 [node name="Arrow" parent="." instance=ExtResource("4_ewkt6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -33.0712)

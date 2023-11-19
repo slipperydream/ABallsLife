@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://73e682xbukfr"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_l76v4"]
+[ext_resource type="PackedScene" uid="uid://7sy7gc06sx86" path="res://ui/life_counter.tscn" id="2_gnve4"]
+[ext_resource type="PackedScene" uid="uid://8nreqq2rooi8" path="res://player/player.tscn" id="3_sjci6"]
+
+[node name="main" type="Node3D" groups=["main"]]
+script = ExtResource("1_l76v4")
+first_level = "res://levels/level_03.tscn"
+
+[node name="LifeCounter" parent="." instance=ExtResource("2_gnve4")]
+
+[node name="Player" parent="." instance=ExtResource("3_sjci6")]

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cy4idrl4hgg0o"
+path="res://.godot/imported/DavidKBD - HexaPuppies Pack - 11 - HexaPuppiesWaiting.ogg-c1c20b72ee5146e49d7119a1e2d46dc6.oggvorbisstr"
+
+[deps]
+
+source_file="res://sound/music/DavidKBD - HexaPuppies Pack - 11 - HexaPuppiesWaiting.ogg"
+dest_files=["res://.godot/imported/DavidKBD - HexaPuppies Pack - 11 - HexaPuppiesWaiting.ogg-c1c20b72ee5146e49d7119a1e2d46dc6.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

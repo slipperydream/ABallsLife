@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cr2aoiik5gw4v"]
+[gd_scene load_steps=10 format=3 uid="uid://664rwm0s58b7"]
 
-[ext_resource type="PackedScene" uid="uid://8nreqq2rooi8" path="res://player/player.tscn" id="1_0p2fh"]
-[ext_resource type="Script" path="res://Goal.gd" id="1_ldffl"]
+[ext_resource type="Script" path="res://levels/level.gd" id="1_vhwbu"]
+[ext_resource type="PackedScene" uid="uid://dxrb1ny5arklw" path="res://entities/broom.tscn" id="2_4muju"]
+[ext_resource type="PackedScene" uid="uid://c52nnhim3fl52" path="res://common/goal.tscn" id="2_yjduy"]
+[ext_resource type="PackedScene" uid="uid://0o5ngra2leq6" path="res://common/deathzone.tscn" id="3_kf76a"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d4oxc"]
 albedo_color = Color(0, 1, 0, 1)
@@ -14,18 +16,27 @@ albedo_color = Color(0.545098, 0.270588, 0.0745098, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q17je"]
 albedo_color = Color(1, 0, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y31mc"]
-albedo_color = Color(1, 0, 0, 1)
+[sub_resource type="Environment" id="Environment_8s6hh"]
+background_mode = 1
+background_color = Color(0.117647, 0.564706, 1, 1)
+ambient_light_color = Color(0.117647, 0.564706, 1, 1)
+tonemap_mode = 3
+fog_enabled = true
+fog_light_color = Color(0.529412, 0.807843, 0.921569, 1)
+adjustment_enabled = true
+adjustment_brightness = 0.75
+adjustment_contrast = 1.5
+adjustment_saturation = 1.2
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_bhsr4"]
-size = Vector3(5, 1, 5)
-
-[node name="Node3D" type="Node3D"]
-
-[node name="Player" parent="." instance=ExtResource("1_0p2fh")]
+[node name="Level04" type="Node3D"]
+script = ExtResource("1_vhwbu")
+next_level = "res://levels/level_10.tscn"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.936348, 0.351074, 0, -0.351074, 0.936348, 0, 1, 3)
+transform = Transform3D(0.5, -0.75, 0.433013, 0, 0.5, 0.866026, -0.866025, -0.433013, 0.25, 0, 5, 0)
+light_color = Color(0.854902, 0.647059, 0.12549, 1)
+light_energy = 2.0
+shadow_enabled = true
 
 [node name="StartingPlatform" type="CSGCombiner3D" parent="."]
 use_collision = true
@@ -67,6 +78,22 @@ use_collision = true
 collision_layer = 2
 material = SubResource("StandardMaterial3D_r88n2")
 
+[node name="Broom" parent="." instance=ExtResource("2_4muju")]
+transform = Transform3D(11.9427, 0, 0, 0, 1, 0, 0, 0, 10.2175, 23.5, 5.788, -36.921)
+speed = 15.0
+
+[node name="Broom2" parent="." instance=ExtResource("2_4muju")]
+transform = Transform3D(11.9427, 0, 0, 0, 1, 0, 0, 0, 10.2175, -23.5, 5.788, -44.329)
+direction = Vector3(1, 0, 0)
+speed = 15.0
+
+[node name="Broom3" parent="." instance=ExtResource("2_4muju")]
+transform = Transform3D(11.9427, 0, 0, 0, 1, 0, 0, 0, 10.2175, 0.114094, -3.31022, -66.2963)
+size = Vector3(1.4, 3, 0.337719)
+direction = Vector3(0, 1, 0)
+speed = 15.0
+wait_time = 2.5
+
 [node name="Course" type="CSGCombiner3D" parent="."]
 use_collision = true
 collision_layer = 2
@@ -86,28 +113,53 @@ transform = Transform3D(6.20805, 0, 0, 0, 1.53664, -6.17738, 0, 0.756187, 12.553
 use_collision = true
 collision_layer = 2
 
-[node name="Floor5" type="CSGBox3D" parent="Course"]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+collision_layer = 2
+
+[node name="Floor5" type="CSGBox3D" parent="CSGCombiner3D"]
 transform = Transform3D(11.9427, 0, 0, 0, 1, 0, 0, 0, 10.2175, -0.0530248, 3.40894, -35.7204)
 use_collision = true
 collision_layer = 2
+size = Vector3(1.5, 1, 1)
+
+[node name="Floor6" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(11.9427, 0, 0, 0, 1, 0, 0, 0, 10.2175, -0.0530248, 3.40894, -52.4748)
+use_collision = true
+collision_layer = 2
+size = Vector3(1.5, 1, 2.282)
+
+[node name="HoleRight" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(11.9427, 0, 0, 0, 1, 0, 0, 0, 10.2175, 3.90578, 3.40894, -47.1225)
+operation = 2
+use_collision = true
+collision_layer = 2
+size = Vector3(0.412415, 1, 2.42978)
+
+[node name="HoleLeft" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(11.9427, 0, 0, 0, 1, 0, 0, 0, 10.2175, -4.68701, 3.40894, -47.1225)
+operation = 2
+use_collision = true
+collision_layer = 2
+size = Vector3(0.412415, 1, 2.42978)
 
 [node name="GoalPlatform" type="CSGCombiner3D" parent="."]
 use_collision = true
 collision_layer = 2
 
 [node name="Floor6" type="CSGBox3D" parent="GoalPlatform"]
-transform = Transform3D(11.9427, 0, 0, 0, 1, 0, 0, 0, 10.2175, -0.0530248, 2.59994, -51.4404)
+transform = Transform3D(11.9427, 0, 0, 0, 1, 0, 0, 0, 10.2175, -0.0530248, 2.59994, -74.1046)
 use_collision = true
 collision_layer = 2
 
 [node name="Floor7" type="CSGBox3D" parent="GoalPlatform"]
-transform = Transform3D(4.80515, 0, 0, 0, 1, 0, 0, 0, 4.4647, -0.0530248, 2.59994, -51.4404)
+transform = Transform3D(4.80515, 0, 0, 0, 1, 0, 0, 0, 4.4647, -0.0591727, 2.73988, -74.0994)
 operation = 2
 use_collision = true
 collision_layer = 2
 
 [node name="Flagpole" type="CSGBox3D" parent="GoalPlatform"]
-transform = Transform3D(0.951353, 0, 0, 0, 14.3377, 0, 0, 0, 1.06187, -2.41784, 2.59994, -53.7737)
+transform = Transform3D(0.951353, 0, 0, 0, 14.3377, 0, 0, 0, 1.06187, -2.41784, 2.59994, -76.4173)
 use_collision = true
 collision_layer = 2
 size = Vector3(0.25, 1, 0.25)
@@ -118,15 +170,14 @@ transform = Transform3D(15.8875, 0, 0, 0, 1, 0, 0, 0, 0.814909, 1.0997, 0.43637,
 size = Vector3(0.150818, 0.111941, 0.1)
 material = SubResource("StandardMaterial3D_q17je")
 
-[node name="Goal" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0966825, 2.01469, -51.0925)
-material_override = SubResource("StandardMaterial3D_y31mc")
-collision_layer = 8
-size = Vector3(5, 1, 5)
-script = ExtResource("1_ldffl")
+[node name="Goal" parent="." instance=ExtResource("2_yjduy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0966825, 2.01469, -74.4015)
 
-[node name="Area3D" type="Area3D" parent="Goal"]
-collision_layer = 8
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8s6hh")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Goal/Area3D"]
-shape = SubResource("BoxShape3D_bhsr4")
+[node name="Deathzone" parent="." instance=ExtResource("3_kf76a")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, -10, -34.0633)
+
+[connection signal="goal_reached" from="Goal" to="." method="_on_goal_goal_reached"]
+[connection signal="player_died" from="Deathzone" to="." method="_on_deathzone_player_died"]

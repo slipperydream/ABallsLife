@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b0pu0krpss04j"
+path="res://.godot/imported/DavidKBD - HexaPuppies Pack - 04 - Sunny Days - 1.ogg-07629ee55462c3117fa90c8f8a20bbcd.oggvorbisstr"
+
+[deps]
+
+source_file="res://sound/music/DavidKBD - HexaPuppies Pack - 04 - Sunny Days - 1.ogg"
+dest_files=["res://.godot/imported/DavidKBD - HexaPuppies Pack - 04 - Sunny Days - 1.ogg-07629ee55462c3117fa90c8f8a20bbcd.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

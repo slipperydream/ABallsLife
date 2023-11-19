@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://7sy7gc06sx86"]
+
+[ext_resource type="Script" path="res://ui/LifeCounter.gd" id="1_4ubed"]
+[ext_resource type="Texture2D" uid="uid://tdpxml4m7vfv" path="res://ui/life_icon.png" id="2_72uil"]
+
+[node name="LifeCounter" type="HBoxContainer"]
+offset_right = 72.0
+offset_bottom = 35.0
+script = ExtResource("1_4ubed")
+
+[node name="LifeIcon1" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_72uil")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "x 3"

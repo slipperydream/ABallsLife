@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cru1m57xr0k2r"
+path="res://.godot/imported/DavidKBD - HexaPuppies Pack - 06 - Icecap Mountains - 1.ogg-4668d044570184758d1fd8449e5c9abb.oggvorbisstr"
+
+[deps]
+
+source_file="res://sound/music/DavidKBD - HexaPuppies Pack - 06 - Icecap Mountains - 1.ogg"
+dest_files=["res://.godot/imported/DavidKBD - HexaPuppies Pack - 06 - Icecap Mountains - 1.ogg-4668d044570184758d1fd8449e5c9abb.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

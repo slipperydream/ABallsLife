@@ -11,8 +11,15 @@ config_version=5
 [application]
 
 config/name="A Balls Life"
+run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+SettingsManager="*res://utility/settings_manager.tscn"
+BackgroundMusic="*res://sound/background_music.tscn"
+AudioStreamManager="*res://sound/AudioStreamManager.gd"
 
 [debug]
 
