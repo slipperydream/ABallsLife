@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcnlixfgwk2ur"]
+
+[ext_resource type="Script" path="res://entities/bowling_pin.gd" id="1_8q5cj"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_5qguw"]
+height = 2.75115
+radius = 0.669852
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mdgt0"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="Pin1" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -71.9115)
+collision_mask = 3
+mass = 10.0
+script = ExtResource("1_8q5cj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0169005, 0.833226, -0.0207088)
+shape = SubResource("CylinderShape3D_5qguw")
+
+[node name="UglyModel" type="CSGCombiner3D" parent="."]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="UglyModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0407677, 0.584117, 0.018074)
+radius = 0.246947
+height = 2.5
+material = SubResource("StandardMaterial3D_mdgt0")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="UglyModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
+radius = 0.311297
+
+[node name="CSGSphere3D6" type="CSGSphere3D" parent="UglyModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.95, 0)
+radius = 0.270108
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="UglyModel"]
+radius = 0.485265
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="UglyModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00829327, 0.20762, -0.0490477)
+radius = 0.581974
+
+[node name="CSGSphere3D4" type="CSGSphere3D" parent="UglyModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+radius = 0.683431
+
+[node name="CSGSphere3D5" type="CSGSphere3D" parent="UglyModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+radius = 0.579068
+
+[node name="CSGSphere3D7" type="CSGSphere3D" parent="UglyModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08703, 0)
+radius = 0.483732

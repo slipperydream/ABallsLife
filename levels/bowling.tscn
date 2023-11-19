@@ -1,0 +1,263 @@
+[gd_scene load_steps=19 format=3 uid="uid://ditx08ac6167b"]
+
+[ext_resource type="Script" path="res://levels/bowling_level.gd" id="1_k3xjj"]
+[ext_resource type="PackedScene" uid="uid://8nreqq2rooi8" path="res://player/player.tscn" id="2_imt4p"]
+[ext_resource type="PackedScene" uid="uid://dvw04w4y1wmax" path="res://entities/gutter.tscn" id="4_0i241"]
+[ext_resource type="PackedScene" uid="uid://clkjoghk5af8j" path="res://entities/trap.tscn" id="4_ewkt6"]
+[ext_resource type="PackedScene" uid="uid://brp1hkdad6ljo" path="res://entities/bowling_ball.tscn" id="4_mlr16"]
+[ext_resource type="PackedScene" uid="uid://0o5ngra2leq6" path="res://common/deathzone.tscn" id="5_1byqn"]
+[ext_resource type="Texture2D" uid="uid://bvr2ne3d8imlh" path="res://entities/arrow.png" id="5_1gmui"]
+[ext_resource type="PackedScene" uid="uid://dcnlixfgwk2ur" path="res://entities/bowling_pin.tscn" id="7_kboss"]
+[ext_resource type="PackedScene" uid="uid://cbme77r74ek71" path="res://common/scoring_area.tscn" id="8_e4usl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d4oxc"]
+albedo_color = Color(0.741176, 0.717647, 0.419608, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0h5f2"]
+albedo_color = Color(0.741176, 0.717647, 0.419608, 1)
+
+[sub_resource type="Environment" id="Environment_8s6hh"]
+background_mode = 1
+background_color = Color(0.117647, 0.564706, 1, 1)
+ambient_light_color = Color(0.117647, 0.564706, 1, 1)
+tonemap_mode = 3
+fog_enabled = true
+fog_light_color = Color(0.529412, 0.807843, 0.921569, 1)
+adjustment_enabled = true
+adjustment_brightness = 0.75
+adjustment_contrast = 1.5
+adjustment_saturation = 1.2
+
+[sub_resource type="Animation" id="Animation_7kbvu"]
+resource_name = "walkup"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ufbuw"]
+_data = {
+"walkup": SubResource("Animation_7kbvu")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3klj"]
+albedo_color = Color(0.411765, 0.411765, 0.411765, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rgdd2"]
+albedo_color = Color(0.411765, 0.411765, 0.411765, 1)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_oouws"]
+absorbent = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ggdv6"]
+size = Vector3(29.1731, 22.0116, 0.450977)
+
+[node name="BowlingAlley" type="Node3D"]
+script = ExtResource("1_k3xjj")
+player_start = Vector3(2, 0, 3)
+
+[node name="Player" parent="." instance=ExtResource("2_imt4p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 2)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.5, -0.75, 0.433013, 0, 0.5, 0.866026, -0.866025, -0.433013, 0.25, 0, 5, 0)
+light_color = Color(0.854902, 0.647059, 0.12549, 1)
+light_energy = 2.0
+shadow_enabled = true
+
+[node name="StartingPlatform" type="CSGCombiner3D" parent="."]
+use_collision = true
+collision_layer = 2
+
+[node name="Floor" type="CSGBox3D" parent="StartingPlatform"]
+transform = Transform3D(49.3117, 0, 0, 0, 1, 0, 0, 0, 12.8482, 0, -1.08905, 1.69561)
+use_collision = true
+collision_layer = 2
+size = Vector3(1, 1, 1.07203)
+material = SubResource("StandardMaterial3D_d4oxc")
+
+[node name="Lane" type="CSGBox3D" parent="."]
+transform = Transform3D(11.9427, 0, 0, 0, 1, 0, 0, 0, 10.2175, 0, -1.08905, -103.37)
+use_collision = true
+collision_layer = 2
+size = Vector3(1.85, 1, 19.2)
+material = SubResource("StandardMaterial3D_0h5f2")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8s6hh")
+
+[node name="Deathzone" parent="." instance=ExtResource("5_1byqn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, -36.9874)
+
+[node name="LeftGutter" parent="." instance=ExtResource("4_0i241")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.4, 0, 0)
+
+[node name="RightGutter" parent="." instance=ExtResource("4_0i241")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ufbuw")
+}
+
+[node name="Arrow" parent="." instance=ExtResource("4_ewkt6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -33.0712)
+image = ExtResource("5_1gmui")
+
+[node name="Arrow2" parent="." instance=ExtResource("4_ewkt6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9483, 0, -30.1301)
+image = ExtResource("5_1gmui")
+
+[node name="Arrow5" parent="." instance=ExtResource("4_ewkt6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94291, 0, -30.1301)
+image = ExtResource("5_1gmui")
+
+[node name="Arrow3" parent="." instance=ExtResource("4_ewkt6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.00651, 0, -26.5084)
+image = ExtResource("5_1gmui")
+
+[node name="Arrow6" parent="." instance=ExtResource("4_ewkt6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.37138, 0, -26.5084)
+image = ExtResource("5_1gmui")
+
+[node name="Arrow4" parent="." instance=ExtResource("4_ewkt6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.82959, 0, -22.4666)
+image = ExtResource("5_1gmui")
+
+[node name="Arrow7" parent="." instance=ExtResource("4_ewkt6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.90884, 0, -22.4666)
+image = ExtResource("5_1gmui")
+
+[node name="BallHolder" type="CSGCombiner3D" parent="."]
+use_collision = true
+collision_layer = 2
+
+[node name="base" type="CSGBox3D" parent="BallHolder"]
+transform = Transform3D(1.43879, 0, 0, 0, 1, 0, 0, 0, 1.7, -18, 0, 3)
+size = Vector3(4.56549, 4, 6)
+material = SubResource("StandardMaterial3D_j3klj")
+
+[node name="left_rack" type="CSGCylinder3D" parent="BallHolder"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -19.55, 1.25, 3.279)
+operation = 2
+radius = 1.65
+height = 9.35391
+material = SubResource("StandardMaterial3D_rgdd2")
+
+[node name="BowlingBall2" parent="BallHolder/left_rack" instance=ExtResource("4_mlr16")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.594347, -3.34983, 0.187119)
+ball_color = Color(0, 1, 0, 1)
+
+[node name="BowlingBall3" parent="BallHolder/left_rack" instance=ExtResource("4_mlr16")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.594347, -1.40142, 0.187119)
+ball_color = Color(1, 1, 0, 1)
+
+[node name="BowlingBall4" parent="BallHolder/left_rack" instance=ExtResource("4_mlr16")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.566628, 0.520449, 0.281414)
+ball_color = Color(1, 0, 0, 1)
+
+[node name="BowlingBall6" parent="BallHolder/left_rack" instance=ExtResource("4_mlr16")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.571239, 2.73551, 0.217641)
+ball_color = Color(0.117647, 0.564706, 1, 1)
+
+[node name="right_rack" type="CSGCylinder3D" parent="BallHolder"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -16.4, 1.25, 3.279)
+operation = 2
+radius = 1.65
+height = 9.35391
+material = SubResource("StandardMaterial3D_rgdd2")
+
+[node name="BowlingBall5" parent="BallHolder/right_rack" instance=ExtResource("4_mlr16")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.0604362, -1.34285, 0.243496)
+ball_color = Color(0.627451, 0.12549, 0.941176, 1)
+
+[node name="BowlingBall" parent="BallHolder/right_rack" instance=ExtResource("4_mlr16")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.248842, 0.817288, -0.113603)
+
+[node name="Pin1" parent="." instance=ExtResource("7_kboss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0263653, -0.223056, -193.011)
+starting_point = Vector3(-0.0263653, -0.223056, -193.011)
+
+[node name="Pin2" parent="." instance=ExtResource("7_kboss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.73474, -0.223056, -194.789)
+starting_point = Vector3(-1.73474, -0.223056, -194.789)
+
+[node name="Pin3" parent="." instance=ExtResource("7_kboss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9641, -0.223056, -194.789)
+starting_point = Vector3(1.9641, -0.223056, -194.789)
+
+[node name="Pin4" parent="." instance=ExtResource("7_kboss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.61209, -0.223056, -196.787)
+starting_point = Vector3(-3.61209, -0.223056, -196.787)
+
+[node name="Pin5" parent="." instance=ExtResource("7_kboss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0228968, -0.223056, -196.471)
+starting_point = Vector3(-0.0228968, -0.223056, -196.471)
+
+[node name="Pin6" parent="." instance=ExtResource("7_kboss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.04136, -0.315166, -196.438)
+starting_point = Vector3(4.04136, -0.315166, -196.438)
+
+[node name="Pin7" parent="." instance=ExtResource("7_kboss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.69813, -0.223056, -198.192)
+starting_point = Vector3(-5.69813, -0.223056, -198.192)
+
+[node name="Pin8" parent="." instance=ExtResource("7_kboss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.90283, -0.223056, -198.327)
+starting_point = Vector3(-1.90283, -0.223056, -198.327)
+
+[node name="Pin9" parent="." instance=ExtResource("7_kboss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.30218, -0.223056, -198.529)
+starting_point = Vector3(2.30218, -0.223056, -198.529)
+
+[node name="Pin10" parent="." instance=ExtResource("7_kboss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.05755, -0.223056, -198.221)
+starting_point = Vector3(6.05755, -0.223056, -198.221)
+
+[node name="ScoringArea" parent="." instance=ExtResource("8_e4usl")]
+transform = Transform3D(5.6757, 0, 0, 0, 1, 0, 0, 0, 2.39975, 0, -1, -207.511)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.69915, -214.885)
+collision_layer = 2
+physics_material_override = SubResource("PhysicsMaterial_oouws")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.524185)
+shape = SubResource("BoxShape3D_ggdv6")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="StaticBody3D"]
+size = Vector3(28.6275, 22.6493, 1.24942)
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.4219, 10.1676, -208.213)
+collision_layer = 2
+physics_material_override = SubResource("PhysicsMaterial_oouws")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+shape = SubResource("BoxShape3D_ggdv6")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="StaticBody3D2"]
+size = Vector3(0.211913, 22.687, 13.3012)
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.7239, 9.97256, -208.213)
+collision_layer = 2
+physics_material_override = SubResource("PhysicsMaterial_oouws")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3"]
+shape = SubResource("BoxShape3D_ggdv6")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="StaticBody3D3"]
+size = Vector3(0.211913, 22.687, 13.3012)
+
+[connection signal="player_died" from="Deathzone" to="." method="_on_deathzone_player_died"]
+[connection signal="pins_recorded" from="ScoringArea" to="." method="_on_backstop_pins_recorded"]
+[connection signal="reset_player" from="ScoringArea" to="." method="_on_backstop_reset_player"]

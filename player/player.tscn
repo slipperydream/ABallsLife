@@ -2,33 +2,41 @@
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_c6e13"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7ppnb"]
+friction = 4.0
+rough = true
+bounce = 0.5
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_p78r1"]
-radius = 0.484959
+radius = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8b2e6"]
 albedo_color = Color(1, 0.843137, 0, 1)
 metallic = 1.0
+roughness = 0.6
 normal_enabled = true
 
-[sub_resource type="Environment" id="Environment_m7itj"]
-background_mode = 1
-background_color = Color(0.529412, 0.807843, 0.921569, 1)
-ambient_light_source = 2
-ambient_light_color = Color(1, 1, 1, 1)
-
-[node name="Player" type="RigidBody3D"]
-collision_mask = 14
+[node name="Player" type="RigidBody3D" groups=["Player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_mask = 15
+mass = 100.0
+physics_material_override = SubResource("PhysicsMaterial_7ppnb")
+angular_damp = 1.0
 script = ExtResource("1_c6e13")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_p78r1")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="CollisionShape3D"]
+radius = 1.0
 material = SubResource("StandardMaterial3D_8b2e6")
 
 [node name="CameraRig" type="Marker3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="CameraRig"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 2.85, 3.5)
-environment = SubResource("Environment_m7itj")
 current = true
+
+[node name="FloorCheck" type="RayCast3D" parent="."]
+target_position = Vector3(0, -1.5, 0)
+collision_mask = 2

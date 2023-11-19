@@ -1,0 +1,151 @@
+[gd_scene load_steps=10 format=3 uid="uid://jk6efgbk0c6k"]
+
+[ext_resource type="Script" path="res://levels/level.gd" id="1_47b7r"]
+[ext_resource type="PackedScene" uid="uid://8nreqq2rooi8" path="res://player/player.tscn" id="2_tn2db"]
+[ext_resource type="PackedScene" uid="uid://c52nnhim3fl52" path="res://common/goal.tscn" id="3_k10pi"]
+[ext_resource type="PackedScene" uid="uid://0o5ngra2leq6" path="res://common/deathzone.tscn" id="4_n4i70"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d4oxc"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r88n2"]
+albedo_color = Color(0.545098, 0.270588, 0.0745098, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0bppb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q17je"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="Environment" id="Environment_8s6hh"]
+background_mode = 1
+background_color = Color(0.117647, 0.564706, 1, 1)
+ambient_light_color = Color(0.117647, 0.564706, 1, 1)
+tonemap_mode = 3
+fog_enabled = true
+fog_light_color = Color(0.529412, 0.807843, 0.921569, 1)
+adjustment_enabled = true
+adjustment_brightness = 0.75
+adjustment_contrast = 1.5
+adjustment_saturation = 1.2
+
+[node name="Level02" type="Node3D"]
+script = ExtResource("1_47b7r")
+next_level = "res://levels/bowling.tscn"
+
+[node name="Player" parent="." instance=ExtResource("2_tn2db")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.5, -0.75, 0.433013, 0, 0.5, 0.866026, -0.866025, -0.433013, 0.25, 0, 5, 0)
+light_color = Color(0.854902, 0.647059, 0.12549, 1)
+light_energy = 2.0
+shadow_enabled = true
+
+[node name="StartingPlatform" type="CSGCombiner3D" parent="."]
+use_collision = true
+collision_layer = 2
+
+[node name="Floor" type="CSGBox3D" parent="StartingPlatform"]
+transform = Transform3D(11.9427, 0, 0, 0, 1, 0, 0, 0, 10.2175, 0, -1.08905, 0)
+use_collision = true
+collision_layer = 2
+material = SubResource("StandardMaterial3D_d4oxc")
+
+[node name="Wall" type="CSGBox3D" parent="StartingPlatform"]
+transform = Transform3D(1.6066, 0, 0, 0, 1, 0, 0, 0, 10.2175, -5.10364, -0.000509977, -0.00112569)
+use_collision = true
+collision_layer = 2
+material = SubResource("StandardMaterial3D_r88n2")
+
+[node name="Wall2" type="CSGBox3D" parent="StartingPlatform"]
+transform = Transform3D(1.6066, 0, 0, 0, 1, 0, 0, 0, 10.2175, 5.12554, -0.000509977, -0.00112569)
+use_collision = true
+collision_layer = 2
+material = SubResource("StandardMaterial3D_r88n2")
+
+[node name="Wall3" type="CSGBox3D" parent="StartingPlatform"]
+transform = Transform3D(9.77044, 0, 0, 0, 1, 0, 0, 0, 1.28747, 0.103614, -0.000509977, 4.45142)
+use_collision = true
+collision_layer = 2
+material = SubResource("StandardMaterial3D_r88n2")
+
+[node name="Wall4" type="CSGBox3D" parent="StartingPlatform"]
+transform = Transform3D(2.92345, 0, 0, 0, 1, 0, 0, 0, 1.28747, 3.14096, -0.000509977, -4.47652)
+use_collision = true
+collision_layer = 2
+material = SubResource("StandardMaterial3D_r88n2")
+
+[node name="Wall5" type="CSGBox3D" parent="StartingPlatform"]
+transform = Transform3D(2.94346, 0, 0, 0, 1, 0, 0, 0, 1.28747, -3.04247, -0.000509977, -4.47652)
+use_collision = true
+collision_layer = 2
+material = SubResource("StandardMaterial3D_r88n2")
+
+[node name="Course" type="CSGCombiner3D" parent="."]
+use_collision = true
+collision_layer = 2
+
+[node name="Floor2" type="CSGBox3D" parent="Course"]
+transform = Transform3D(11.9427, 0, 0, 0, 1, 0, 0, 0, 10.2175, 0, -1.08905, -16.3647)
+use_collision = true
+collision_layer = 2
+size = Vector3(2.41719, 1, 1)
+
+[node name="Hole" type="CSGBox3D" parent="Course"]
+transform = Transform3D(3.50247, 0, 0, 0, 1, 0, 0, 0, 3.83901, 0.130726, -1.08905, -16.3647)
+operation = 2
+use_collision = true
+collision_layer = 2
+size = Vector3(5.92471, 1, 1)
+
+[node name="Floor3" type="CSGBox3D" parent="Course"]
+transform = Transform3D(2.87041, 0, 0, 0, 0.928858, 0, 0, 0, 6.1453, 0, -1.08905, -8.15577)
+use_collision = true
+collision_layer = 2
+
+[node name="Floor4" type="CSGBox3D" parent="Course"]
+transform = Transform3D(6.20805, 0, 0, 0, 1.53664, -6.17738, 0, 0.756187, 12.553, 0, 0.04672, -24.723)
+use_collision = true
+collision_layer = 2
+
+[node name="Floor5" type="CSGBox3D" parent="Course"]
+transform = Transform3D(11.9427, 0, 0, 0, 1, 0, 0, 0, 10.2175, -0.311628, 3.40894, -35.7204)
+use_collision = true
+collision_layer = 2
+
+[node name="Goal" parent="." instance=ExtResource("3_k10pi")]
+
+[node name="GoalPlatform" type="CSGCombiner3D" parent="."]
+use_collision = true
+collision_layer = 2
+
+[node name="Floor6" type="CSGBox3D" parent="GoalPlatform"]
+transform = Transform3D(11.9427, 0, 0, 0, 1, 0, 0, 0, 10.2175, -0.0530248, 2.59994, -51.4404)
+use_collision = true
+collision_layer = 2
+
+[node name="Floor7" type="CSGBox3D" parent="GoalPlatform"]
+transform = Transform3D(4.80515, 0, 0, 0, 1, 0, 0, 0, 4.4647, -0.0591727, 2.73988, -51.4353)
+operation = 2
+use_collision = true
+collision_layer = 2
+
+[node name="Flagpole" type="CSGBox3D" parent="GoalPlatform"]
+transform = Transform3D(0.951353, 0, 0, 0, 14.3377, 0, 0, 0, 1.06187, -2.41784, 2.59994, -53.7531)
+use_collision = true
+collision_layer = 2
+size = Vector3(0.25, 1, 0.25)
+material = SubResource("StandardMaterial3D_0bppb")
+
+[node name="flag" type="CSGBox3D" parent="GoalPlatform/Flagpole"]
+transform = Transform3D(15.8875, 0, 0, 0, 1, 0, 0, 0, 0.814909, 1.0997, 0.43637, -0.0202179)
+size = Vector3(0.150818, 0.111941, 0.1)
+material = SubResource("StandardMaterial3D_q17je")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8s6hh")
+
+[node name="Deathzone" parent="." instance=ExtResource("4_n4i70")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
+
+[connection signal="goal_reached" from="Goal" to="." method="_on_goal_goal_reached"]
+[connection signal="player_died" from="Deathzone" to="." method="_on_deathzone_player_died"]

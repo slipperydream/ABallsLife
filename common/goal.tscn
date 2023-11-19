@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://c52nnhim3fl52"]
+
+[ext_resource type="Script" path="res://common/Goal.gd" id="1_pdnj1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y31mc"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bhsr4"]
+size = Vector3(5, 1, 5)
+
+[node name="Goal" type="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0966825, 2.01469, -51.0925)
+material_override = SubResource("StandardMaterial3D_y31mc")
+use_collision = true
+collision_layer = 8
+size = Vector3(5, 1, 5)
+script = ExtResource("1_pdnj1")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_bhsr4")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
