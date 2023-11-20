@@ -1,0 +1,105 @@
+[gd_scene load_steps=8 format=3 uid="uid://bc1g465dewfwn"]
+
+[ext_resource type="Script" path="res://levels/pinball_machine.gd" id="1_k0xc0"]
+[ext_resource type="PackedScene" uid="uid://c52nnhim3fl52" path="res://common/goal.tscn" id="2_68yx6"]
+[ext_resource type="PackedScene" uid="uid://0o5ngra2leq6" path="res://common/deathzone.tscn" id="3_5yaru"]
+[ext_resource type="PackedScene" uid="uid://5kmhpiqyp53j" path="res://entities/plunger.tscn" id="4_jqet8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d4oxc"]
+albedo_color = Color(0.411765, 0.411765, 0.411765, 0)
+metallic = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r88n2"]
+albedo_color = Color(0.411765, 0.411765, 0.411765, 1)
+
+[sub_resource type="Environment" id="Environment_8s6hh"]
+background_mode = 1
+background_color = Color(0.117647, 0.564706, 1, 1)
+ambient_light_color = Color(0.117647, 0.564706, 1, 1)
+tonemap_mode = 3
+fog_enabled = true
+fog_light_color = Color(0.529412, 0.807843, 0.921569, 1)
+adjustment_enabled = true
+adjustment_brightness = 0.75
+adjustment_contrast = 1.5
+adjustment_saturation = 1.2
+
+[node name="TargetRange" type="Node3D"]
+script = ExtResource("1_k0xc0")
+player_start = Vector3(0, 0, -1)
+player_camera_pos = Vector3(0, 1, 3)
+debug = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.685372, 0)
+light_color = Color(0.854902, 0.647059, 0.12549, 1)
+light_energy = 2.0
+shadow_enabled = true
+
+[node name="StartingPlatform" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0)
+use_collision = true
+collision_layer = 2
+
+[node name="Floor" type="CSGBox3D" parent="StartingPlatform"]
+transform = Transform3D(11.9427, 0, 0, 0, 1, 0, 0, 0, 10.2175, 0, -1.08905, 0)
+use_collision = true
+collision_layer = 2
+size = Vector3(0.272519, 1, 1)
+material = SubResource("StandardMaterial3D_d4oxc")
+
+[node name="Floor2" type="CSGBox3D" parent="StartingPlatform"]
+transform = Transform3D(11.9427, 0, 0, 0, 1, 0, 0, 0, 10.2175, 0, 3.68506, -1.27922)
+use_collision = true
+collision_layer = 2
+size = Vector3(0.272519, 1, 1)
+material = SubResource("StandardMaterial3D_d4oxc")
+
+[node name="Wall" type="CSGBox3D" parent="StartingPlatform"]
+transform = Transform3D(1.6066, 0, 0, 0, 2.4502, 0, 0, 0, 10.2175, -2.26404, 1.5745, -0.423148)
+use_collision = true
+collision_layer = 2
+size = Vector3(1, 2.24196, 1)
+material = SubResource("StandardMaterial3D_r88n2")
+
+[node name="Wall2" type="CSGBox3D" parent="StartingPlatform"]
+transform = Transform3D(1.6066, 0, 0, 0, 2.45021, 0, 0, 0, 10.2175, 2.42649, 0.969649, -0.698858)
+use_collision = true
+collision_layer = 2
+size = Vector3(1, 2.46263, 1)
+material = SubResource("StandardMaterial3D_r88n2")
+
+[node name="Wall3" type="CSGBox3D" parent="StartingPlatform"]
+transform = Transform3D(9.77044, 0, 0, 0, 2.4502, 0, 0, 0, 1.28747, 0.103614, -0.000509977, 4.45142)
+use_collision = true
+collision_layer = 2
+size = Vector3(0.325573, 1, 1)
+material = SubResource("StandardMaterial3D_r88n2")
+
+[node name="Wall4" type="CSGBox3D" parent="StartingPlatform"]
+transform = Transform3D(9.77044, 0, 0, 0, 2.45021, 2.98023e-08, 0, -7.45058e-08, 1.28747, 0.061092, -0.699768, 0.495932)
+use_collision = true
+collision_layer = 2
+size = Vector3(0.325573, 0.580503, 0.148715)
+material = SubResource("StandardMaterial3D_r88n2")
+
+[node name="Goal" parent="." instance=ExtResource("2_68yx6")]
+transform = Transform3D(1, 0, 0, 0, 1.18872, 0, 0, 0, 0.0542506, 7.01055, 9.2173, -146.322)
+size = Vector3(5, 9.19295, 5)
+direction = Vector3(-1, 0, 0)
+speed = 5.0
+wait_time = 3.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8s6hh")
+
+[node name="Deathzone" parent="." instance=ExtResource("3_5yaru")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, -10, -34.0633)
+
+[node name="Plunger" parent="." instance=ExtResource("4_jqet8")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 2.5053)
+start_pos = Vector3(0, 0, 2.5)
+wait_time = 3
+
+[connection signal="goal_reached" from="Goal" to="." method="_on_goal_goal_reached"]
+[connection signal="player_died" from="Deathzone" to="." method="_on_deathzone_player_died"]
