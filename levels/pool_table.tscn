@@ -1,0 +1,120 @@
+[gd_scene load_steps=7 format=3 uid="uid://ccdv5c5nbhx0u"]
+
+[ext_resource type="Script" path="res://levels/level.gd" id="1_xf5uw"]
+[ext_resource type="PackedScene" uid="uid://brp1hkdad6ljo" path="res://entities/bowling_ball.tscn" id="2_8v28h"]
+[ext_resource type="PackedScene" uid="uid://0o5ngra2leq6" path="res://common/deathzone.tscn" id="2_uu0mk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r88n2"]
+albedo_color = Color(0.627451, 0.321569, 0.176471, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n1ben"]
+albedo_color = Color(0, 0.501961, 0, 1)
+
+[sub_resource type="Environment" id="Environment_8s6hh"]
+background_mode = 1
+background_color = Color(0.117647, 0.564706, 1, 1)
+ambient_light_color = Color(0.117647, 0.564706, 1, 1)
+tonemap_mode = 3
+fog_light_color = Color(0.529412, 0.807843, 0.921569, 1)
+adjustment_enabled = true
+adjustment_brightness = 0.75
+adjustment_contrast = 1.5
+adjustment_saturation = 1.2
+
+[node name="PoolTable" type="Node3D"]
+script = ExtResource("1_xf5uw")
+player_start = Vector3(-30.191, 0, -22.7828)
+debug = true
+
+[node name="BowlingBall" parent="." instance=ExtResource("2_8v28h")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -30.8873, 0, -71.5213)
+mass = 50.0
+ball_color = Color(1, 1, 0, 1)
+
+[node name="BowlingBall2" parent="." instance=ExtResource("2_8v28h")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -32.7433, 0, -74.7414)
+mass = 50.0
+ball_color = Color(0, 0, 1, 1)
+
+[node name="BowlingBall3" parent="." instance=ExtResource("2_8v28h")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -28.939, 0, -73.91)
+mass = 50.0
+ball_color = Color(1, 0, 0, 1)
+
+[node name="BowlingBall4" parent="." instance=ExtResource("2_8v28h")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -34.6706, 0, -76.6373)
+mass = 50.0
+ball_color = Color(0.627451, 0.12549, 0.941176, 1)
+
+[node name="BowlingBall5" parent="." instance=ExtResource("2_8v28h")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -26.9857, 0, -76.7444)
+mass = 50.0
+ball_color = Color(1, 0.647059, 0, 1)
+
+[node name="BowlingBall6" parent="." instance=ExtResource("2_8v28h")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -32.4016, 0.027894, -79.3032)
+mass = 50.0
+ball_color = Color(0, 1, 0, 1)
+
+[node name="BowlingBall7" parent="." instance=ExtResource("2_8v28h")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -28.9563, 0, -79.0771)
+mass = 50.0
+ball_color = Color(0.690196, 0.188235, 0.376471, 1)
+
+[node name="BowlingBall8" parent="." instance=ExtResource("2_8v28h")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -30.7753, 0, -81.4353)
+mass = 50.0
+
+[node name="BowlingBall9" parent="." instance=ExtResource("2_8v28h")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -30.191, 0, -76.4692)
+mass = 50.0
+ball_color = Color(1, 0.980392, 0.803922, 1)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.5, -0.75, 0.433013, 0, 0.5, 0.866025, -0.866025, -0.433013, 0.25, -10.9285, 8.18479, 0)
+light_color = Color(0.854902, 0.647059, 0.12549, 1)
+light_energy = 2.0
+shadow_enabled = true
+
+[node name="RightRail" type="CSGBox3D" parent="."]
+transform = Transform3D(1.6066, 0, 0, 0, 3.18183, 0, 0, 0, 58.9599, 0.454364, 0.933459, -54.442)
+use_collision = true
+collision_layer = 2
+size = Vector3(2.61168, 0.973791, 2.04459)
+material = SubResource("StandardMaterial3D_r88n2")
+
+[node name="TopRail" type="CSGBox3D" parent="."]
+transform = Transform3D(-7.02267e-08, 0, 58.9599, 0, 3.18183, 0, -1.6066, 0, -2.57722e-06, -27.3273, 0.81478, -115.967)
+use_collision = true
+collision_layer = 2
+size = Vector3(2.61168, 0.973791, 1.01579)
+material = SubResource("StandardMaterial3D_r88n2")
+
+[node name="BottomRail" type="CSGBox3D" parent="."]
+transform = Transform3D(-7.02267e-08, 0, 58.9599, 0, 3.18183, 0, -1.6066, 0, -2.57722e-06, -26.7089, 0.596412, 2.93129)
+use_collision = true
+collision_layer = 2
+size = Vector3(2.61168, 0.973791, 1.01579)
+material = SubResource("StandardMaterial3D_r88n2")
+
+[node name="LeftRail" type="CSGBox3D" parent="."]
+transform = Transform3D(1.6066, 0, 0, 0, 3.18183, 0, 0, 0, 58.9599, -56.3527, 0.933459, -54.442)
+use_collision = true
+collision_layer = 2
+size = Vector3(2.61168, 0.973791, 2.04459)
+material = SubResource("StandardMaterial3D_r88n2")
+
+[node name="Floor" type="CSGBox3D" parent="."]
+transform = Transform3D(11.9427, 0, 0, 0, 1, 0, 0, 0, 14.5471, -28.1444, -1.08905, -56.9252)
+use_collision = true
+collision_layer = 2
+size = Vector3(5.17851, 1, 8.50707)
+material = SubResource("StandardMaterial3D_n1ben")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8s6hh")
+
+[node name="Deathzone" parent="." instance=ExtResource("2_uu0mk")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, -15, -34.063)
+
+[connection signal="player_died" from="Deathzone" to="." method="_on_deathzone_player_died"]

@@ -21,7 +21,7 @@ func _ready():
 		add_child(player)
 	else:
 		self.connect("finished_level", main._on_finished_level)
-		player.reset(player_start)
+	player.reset(player_start)
 	player.set_camera_pos(player_camera_pos)
 	
 func _on_deathzone_player_died():
