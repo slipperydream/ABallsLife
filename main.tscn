@@ -6,7 +6,7 @@
 
 [node name="main" type="Node3D" groups=["main"]]
 script = ExtResource("1_l76v4")
-first_level = "res://levels/level_03.tscn"
+first_level = "res://levels/level_01.tscn"
 
 [node name="LifeCounter" parent="." instance=ExtResource("2_gnve4")]
 

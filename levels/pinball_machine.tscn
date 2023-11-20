@@ -1,0 +1,176 @@
+[gd_scene load_steps=9 format=3 uid="uid://cxx8uipjpyy56"]
+
+[ext_resource type="Script" path="res://levels/pinball_machine.gd" id="1_io3pd"]
+[ext_resource type="PackedScene" uid="uid://0o5ngra2leq6" path="res://common/deathzone.tscn" id="3_mtbaq"]
+[ext_resource type="PackedScene" uid="uid://5kmhpiqyp53j" path="res://entities/plunger.tscn" id="4_l3t8f"]
+[ext_resource type="PackedScene" uid="uid://bvpc5wfn78gu4" path="res://entities/flipper_bat.tscn" id="4_ug61e"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r88n2"]
+albedo_color = Color(0.545098, 0.270588, 0.0745098, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ctvfn"]
+size = Vector3(1, 1.70144, 13.3888)
+
+[sub_resource type="Environment" id="Environment_8s6hh"]
+background_mode = 1
+background_color = Color(0.117647, 0.564706, 1, 1)
+ambient_light_color = Color(0.117647, 0.564706, 1, 1)
+tonemap_mode = 3
+fog_enabled = true
+fog_light_color = Color(0.529412, 0.807843, 0.921569, 1)
+adjustment_enabled = true
+adjustment_brightness = 0.75
+adjustment_contrast = 1.5
+adjustment_saturation = 1.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6wca1"]
+radius = 1.62158
+
+[node name="Pinball" type="Node3D"]
+script = ExtResource("1_io3pd")
+player_start = Vector3(0, 0.32, -2.2)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.5, -0.75, 0.433013, 0, 0.5, 0.866025, -0.866025, -0.433013, 0.25, -10.9285, 8.18479, 0)
+light_color = Color(0.854902, 0.647059, 0.12549, 1)
+light_energy = 2.0
+shadow_enabled = true
+
+[node name="StartingPlatform" type="CSGCombiner3D" parent="."]
+use_collision = true
+collision_layer = 2
+
+[node name="InnerWall" type="CSGBox3D" parent="StartingPlatform"]
+transform = Transform3D(1.6066, 0, 0, 0, 3.18183, 0, 0, 0, 58.9599, -2.22201, 1.36044, -24.2665)
+use_collision = true
+collision_layer = 2
+material = SubResource("StandardMaterial3D_r88n2")
+
+[node name="WallBehindPlunger" type="CSGBox3D" parent="StartingPlatform"]
+transform = Transform3D(9.77044, 0, 0, 0, 3.18183, 0, 0, 0, 1.28747, -0.019153, 1.36044, 4.59737)
+use_collision = true
+collision_layer = 2
+size = Vector3(0.299783, 1, 1.04026)
+material = SubResource("StandardMaterial3D_r88n2")
+
+[node name="RightWall" type="CSGBox3D" parent="."]
+transform = Transform3D(1.6066, 0, 0, 0, 3.18183, 0, 0, 0, 58.9599, 2.14095, 3.08739, -55.1572)
+use_collision = true
+collision_layer = 2
+size = Vector3(1, 2.24977, 2.04459)
+material = SubResource("StandardMaterial3D_r88n2")
+
+[node name="LeftWall" type="CSGBox3D" parent="."]
+transform = Transform3D(1.6066, 0, 0, 0, 3.18183, 0, 0, 0, 58.9599, -56.9847, 3.08739, -55.1572)
+use_collision = true
+collision_layer = 2
+size = Vector3(1, 2.24977, 2.04459)
+material = SubResource("StandardMaterial3D_r88n2")
+
+[node name="Backwall" type="CSGBox3D" parent="."]
+transform = Transform3D(1.6066, 0, 0, 0, 1, 0, 0, 0, 58.9599, -27.1735, 4.32156, -116.22)
+use_collision = true
+collision_layer = 2
+size = Vector3(36.3931, 9.99257, 0.0249615)
+material = SubResource("StandardMaterial3D_r88n2")
+
+[node name="LeftCorner" type="StaticBody3D" parent="."]
+transform = Transform3D(0.428935, 0, -0.903335, 0, 1, 0, 0.903335, 0, 0.428935, -51.3146, 0.23472, -113.797)
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LeftCorner"]
+visibility_parent = NodePath("../CSGBox")
+shape = SubResource("BoxShape3D_ctvfn")
+
+[node name="CSGBox" type="CSGBox3D" parent="LeftCorner"]
+transform = Transform3D(1.00439, 0, 0, 0, 1.00439, 0, 0, 0, 1.00439, 0, 0, 0)
+collision_layer = 2
+size = Vector3(1, 1.87767, 13.4128)
+
+[node name="RightCorner" type="StaticBody3D" parent="."]
+transform = Transform3D(0.42831, 0, 0.903632, 0, 1, 0, -0.903632, 0, 0.42831, -4.03449, 1.07693, -113.797)
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RightCorner"]
+visibility_parent = NodePath("../CSGBox")
+shape = SubResource("BoxShape3D_ctvfn")
+
+[node name="CSGBox" type="CSGBox3D" parent="RightCorner"]
+transform = Transform3D(1.00439, 0, 0, 0, 1.00439, 0, 0, 0, 1.00439, 0, 0, 0)
+collision_layer = 2
+size = Vector3(1, 4.53356, 13.4128)
+
+[node name="LeftRail" type="CSGCombiner3D" parent="."]
+transform = Transform3D(11.9427, 0, 0, 0, 1, 0, 0, 0, 14.5471, -31.2179, -1.08905, -56.9252)
+use_collision = true
+collision_layer = 2
+
+[node name="Slant" type="CSGBox3D" parent="LeftRail"]
+transform = Transform3D(0.0242051, 0, 0.686399, 0, 2.785, 0, -0.0419245, 0, 0.396292, -1.38918, 2, 3.4092)
+size = Vector3(1, 1, 1.74723)
+
+[node name="Barrier" type="CSGBox3D" parent="LeftRail"]
+transform = Transform3D(0.0484103, 0, 0, 0, 2.785, 0, 0, 0, 0.248622, -0.789239, 2, 3.92818)
+size = Vector3(0.450867, 1, 1.56689)
+
+[node name="Slant2" type="CSGBox3D" parent="."]
+transform = Transform3D(0.524252, 0, -6.99304, 0, 2.87621, 0, 0.908032, 0, 4.03743, -17.1304, 0.783686, -13.643)
+use_collision = true
+collision_layer = 2
+size = Vector3(1, 1, 1.74723)
+
+[node name="Slant3" type="CSGBox3D" parent="."]
+transform = Transform3D(0.524252, 0, 6.99304, 0, 2.87621, 0, -0.908032, 0, 4.03743, -44.7634, 0.783686, -13.643)
+use_collision = true
+collision_layer = 2
+size = Vector3(1, 1, 1.74723)
+
+[node name="RightRail" type="CSGCombiner3D" parent="."]
+use_collision = true
+collision_layer = 2
+
+[node name="Slant" type="CSGBox3D" parent="RightRail"]
+transform = Transform3D(0.439382, 0, -10.5089, 0, 2.87621, 0, 0.761032, 0, 6.06732, -13.354, 0.783686, -7.36754)
+size = Vector3(1, 1, 1.74723)
+
+[node name="Barrier2" type="CSGBox3D" parent="RightRail"]
+transform = Transform3D(0.729447, 0, 0, 0, 2.87621, 0, 0, 0, 4.5632, -22.558, 0.527559, 1.2062)
+size = Vector3(0.450867, 1, 1.56689)
+
+[node name="Floor" type="CSGBox3D" parent="."]
+transform = Transform3D(11.9427, 0, 0, 0, 1, 0, 0, 0, 14.5471, -28.1444, -1.08905, -56.9252)
+use_collision = true
+collision_layer = 2
+size = Vector3(5.17851, 1, 8.50707)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8s6hh")
+
+[node name="Deathzone" parent="." instance=ExtResource("3_mtbaq")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, -15, -34.063)
+
+[node name="Plunger" parent="." instance=ExtResource("4_l3t8f")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.319593, 2.88657)
+force = 100.0
+start_pos = Vector3(0, 0.319593, 2.88657)
+end_pos = Vector3(0, 0.319593, -2.0989)
+
+[node name="RightFlipperBat" parent="." instance=ExtResource("4_ug61e")]
+transform = Transform3D(0.819152, 0, -0.573576, 0, 1, 0, 0.573576, 0, 0.819152, -23.6214, 0, -10.4301)
+start_angle = -35.0
+end_angle = -125.0
+
+[node name="LeftFlipperBat" parent="." instance=ExtResource("4_ug61e")]
+transform = Transform3D(0.819152, 0, 0.573576, 0, 1, 0, -0.573576, 0, 0.819152, -37.8632, 0, -9.75943)
+start_angle = 35.0
+end_angle = 125.0
+
+[node name="CameraChange" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -53.8794)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraChange"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14219, 1.91953, 3.46896)
+shape = SubResource("SphereShape3D_6wca1")
+
+[connection signal="player_died" from="Deathzone" to="." method="_on_deathzone_player_died"]
+[connection signal="body_entered" from="CameraChange" to="." method="_on_camera_change_body_entered"]

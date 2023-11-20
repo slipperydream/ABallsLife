@@ -28,7 +28,7 @@ func reset_pins():
 				child.reset()
 
 
-func _on_backstop_pins_recorded():
+func _on_backstop_pins_recorded(_value):
 	reset_pins()
 
 func _on_backstop_reset_player():
@@ -41,6 +41,7 @@ func check_for_frame_over():
 		if bowling_attempts >= bowling_attempts_per_frame:
 			reset_frame()
 			print("new_frame")
+	finished_level.emit()
 		
 
 func _on_deathzone_player_died():

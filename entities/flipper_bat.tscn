@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvpc5wfn78gu4"]
+
+[ext_resource type="Script" path="res://entities/flipper_bat.gd" id="1_pgtdm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oia6k"]
+albedo_color = Color(0.862745, 0.0784314, 0.235294, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ikwc8"]
+size = Vector3(1, 1, 2.47212)
+
+[node name="FlipperBat" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3028, 0, 0)
+collision_layer = 2
+script = ExtResource("1_pgtdm")
+
+[node name="FlipperModel" type="CSGPolygon3D" parent="."]
+transform = Transform3D(0.727348, 0, 0, 0, -1.17112e-07, -1.88885, 0, 2.67922, -8.25645e-08, 0, 0, 0)
+polygon = PackedVector2Array(-0.717247, 0.132138, -0.0437775, 1.46472, 0.301741, 1.47679, 1.01258, 0.12944)
+material = SubResource("StandardMaterial3D_oia6k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, 0.180826, 1.37735, 2.0029)
+shape = SubResource("BoxShape3D_ikwc8")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

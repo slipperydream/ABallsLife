@@ -23,6 +23,7 @@ mass = 100.0
 physics_material_override = SubResource("PhysicsMaterial_7ppnb")
 angular_damp = 1.0
 script = ExtResource("1_c6e13")
+camera_pos = Vector3(0, 5, 15)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_p78r1")
