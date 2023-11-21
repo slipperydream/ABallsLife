@@ -29,6 +29,7 @@ adjustment_saturation = 1.2
 
 [node name="Level01" type="Node3D"]
 script = ExtResource("1_ohe1v")
+stage_time_seconds = 120
 next_level = "res://levels/level_02.tscn"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

@@ -1,13 +1,40 @@
-[gd_scene load_steps=4 format=3 uid="uid://73e682xbukfr"]
+[gd_scene load_steps=7 format=3 uid="uid://73e682xbukfr"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_l76v4"]
+[ext_resource type="PackedScene" uid="uid://ou27wkci6ypv" path="res://ui/title_screen.tscn" id="2_5asy1"]
 [ext_resource type="PackedScene" uid="uid://7sy7gc06sx86" path="res://ui/life_counter.tscn" id="2_gnve4"]
 [ext_resource type="PackedScene" uid="uid://8nreqq2rooi8" path="res://player/player.tscn" id="3_sjci6"]
+[ext_resource type="PackedScene" uid="uid://cmxeh4a4jblpp" path="res://ui/score_tracker.tscn" id="4_v6rgm"]
+[ext_resource type="PackedScene" uid="uid://brao3hkhd1hos" path="res://ui/time.tscn" id="5_fluef"]
 
 [node name="main" type="Node3D" groups=["main"]]
 script = ExtResource("1_l76v4")
 first_level = "res://levels/level_01.tscn"
+player_scene = ExtResource("3_sjci6")
+
+[node name="TitleScreen" parent="." instance=ExtResource("2_5asy1")]
+
+[node name="ScoreTracker" parent="." instance=ExtResource("4_v6rgm")]
+visible = false
+offset_left = 3.0
+offset_top = 8.0
+offset_right = 259.0
+offset_bottom = 80.0
 
 [node name="LifeCounter" parent="." instance=ExtResource("2_gnve4")]
+offset_left = 215.0
+offset_top = 5.0
+offset_right = 287.0
+offset_bottom = 40.0
 
-[node name="Player" parent="." instance=ExtResource("3_sjci6")]
+[node name="Time" parent="." instance=ExtResource("5_fluef")]
+visible = false
+
+[node name="GameOverTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="game_over" from="." to="." method="_on_game_over"]
+[connection signal="score_changed" from="." to="ScoreTracker" method="_on_main_score_changed"]
+[connection signal="new_game" from="TitleScreen" to="." method="_on_title_screen_new_game"]
+[connection signal="timeout" from="GameOverTimer" to="." method="_on_game_over_timer_timeout"]
